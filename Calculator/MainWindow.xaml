@@ -5,8 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="550" MinWidth="600">
+    <Window.Background>
+        <ImageBrush ImageSource="bin/Debug/images.jpg"/>
+    </Window.Background>
+    <Window.Resources>
+        <Style x:Key="Font">
+            <Setter Property="Control.FontFamily" Value="Segoe UI"/>
+        </Style>
+        <Style x:Key="Button" TargetType="Button" BasedOn="{StaticResource ResourceKey=Font}">
+            <Setter Property="Background" Value="#0CFFFFFF" />
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="VerticalAlignment" Value="TOP"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <EventSetter Event="Click" Handler="Symbol_click"/>
+        </Style>
+        <Style x:Key ="TextBox" TargetType="TextBox" BasedOn="{StaticResource ResourceKey=Font}">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="VerticalAlignment" Value="TOP"/>
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#33FFFFFF" />
+            <Setter Property="Foreground" Value="#FF1F1F1F" />
+            <Style.Triggers>
+                <Trigger Property="Control.IsFocused" Value="True">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="105" VerticalAlignment="Top">
+            <Grid.Resources >
+                <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey=TextBox}"/>
+            </Grid.Resources>
+            <TextBox x:Name="Input_line" Margin="10,10,10,0" Background="#7FFFFFFF" Height="45" FontSize="30" TextChanged="Input_line_TextChanged"/>
+            <TextBox x:Name="Answer_line" Margin="10,60,10,0" Background="#33FFFFFF" Height="35" FontSize="22" IsReadOnly="True"/>
+        </Grid>
+        <Grid Grid.Row="1" Width="auto">
+            <Grid.Resources >
+                <Style TargetType="Button" BasedOn="{StaticResource ResourceKey=Button}"/>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="NumPad" Width="60*"/>
+                <ColumnDefinition Width="40*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1" HorizontalAlignment ="Center" VerticalAlignment="Center" Width="auto">
+                <Grid>
+                    <Button x:Name="Num_1"   Content="1"  Margin="10,10,10,10"/>
+                    <Button x:Name="Num_2"   Content="2"  Margin="75,10,10,10"/>
+                    <Button x:Name="Num_3"   Content="3"  Margin="140,10,10,10"/>
+                    <Button x:Name="Div"     Content="\"  Margin="210,10,10,10"/>
+                    <Button x:Name="Mult"    Content="*"  Margin="275,10,10,10"/>
+                    <Button x:Name="Num_4"   Content="4"  Margin="10,75,10,10"/>
+                    <Button x:Name="Num_5"   Content="5"  Margin="75,75,10,10"/>
+                    <Button x:Name="Num_6"   Content="6"  Margin="140,75,10,10"/>
+                    <Button x:Name="Minus"   Content="-"  Margin="210,75,10,10"/>
+                    <Button x:Name="Summ"    Content="+"  Margin="275,75,10,10"/>
+                    <Button x:Name="Num_7"   Content="7"  Margin="10,140,10,10"/>
+                    <Button x:Name="Num_8"   Content="8"  Margin="75,140,10,10"/>
+                    <Button x:Name="Num_9"   Content="9"  Margin="140,140,10,10"/>
+                    <Button x:Name="BackS"   Content="⟵"  Margin="210,140,0,0" Width="125" />
+                    <Button x:Name="Symb_pm" Content="±"  Margin="10,205,10,10"/>
+                    <Button x:Name="Num_0"   Content="0"  Margin="75,205,10,10"/>
+                    <Button x:Name="Symb_p"  Content="."  Margin="140,205,10,10"/>
+                    <Button x:Name="Equal"   Content="="  Margin="210,205,0,0" Width="125"/>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
